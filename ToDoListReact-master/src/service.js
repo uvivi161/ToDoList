@@ -8,18 +8,8 @@ axios.defaults.timeout = 5000; // זמן המתנה מקסימלי לתגובה 
 
 
 axios.interceptors.response.use(
-  response => {
-    // כאן תוכל לשנות את התגובה, לבצע פעולות Logging, או כל דבר אחר
-    console.log('Response Interceptor:', response);
-    return response;
-  },
+  response =>response,
   error => {
-    // טיפול בשגיאות בתגובות
-    console.error('Response Error:', error); // הדפסת השגיאה ללוג
-
-    // כאן תוכל לבצע פעולות נוספות בהתאם לצורך
-    // לדוגמה: הצגת הודעה למשתמש, ניסיון חוזר של הבקשה, וכו'
-
     return Promise.reject(error); // חשוב להחזיר את השגיאה כדי שהקוד שקרא לפונקציה יוכל לטפל בה
   }
 );
@@ -31,7 +21,7 @@ export default {
       const result = await axios.get(`/items`)    
       return result.data;
     }
-    catch{
+    catch(error){
       console.error('Error in getTasks:', error);
     }
   },
