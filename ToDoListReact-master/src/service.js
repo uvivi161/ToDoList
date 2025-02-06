@@ -10,7 +10,11 @@ axios.defaults.timeout = 5000; // זמן המתנה מקסימלי לתגובה 
 axios.interceptors.response.use(
   response =>response,
   error => {
-    return Promise.reject(error); // חשוב להחזיר את השגיאה כדי שהקוד שקרא לפונקציה יוכל לטפל בה
+        // אם יש שגיאה, רושמים אותה ללוג
+        console.error('Error response from API:', error);
+    
+        // מחזירים את השגיאה כדי שהקוד יוכל להתמודד איתה
+        return Promise.reject(error);
   }
 );
 
@@ -18,7 +22,7 @@ axios.interceptors.response.use(
 export default {
   getTasks: async () => {
     try{
-      const result = await axios.get(`/items`)    
+      const result = await axios.get(`/api/items`)    
       return result.data;
     }
     catch(error){
@@ -32,7 +36,7 @@ export default {
       return;
     }
     console.log('addTask', name);
-    const result = await axios.post(`/items`,{name: name})
+    const result = await axios.post(`/api/items`,{name: name})
     return {};
   },
 
@@ -42,7 +46,7 @@ export default {
       return;
     }
     console.log('setCompleted', {id, isComplete})
-    const result = await axios.put(`/items/${id}`, { isComplete: isComplete });
+    const result = await axios.put(`/api/items/${id}`, { isComplete: isComplete });
     return result.data;
   },
 
@@ -52,7 +56,7 @@ export default {
       return;
     }
     console.log('deleteTask',id)
-    const result = await axios.delete(`/items/${id}`)
+    const result = await axios.delete(`/api/items/${id}`)
     return result.data;
   }
 };
