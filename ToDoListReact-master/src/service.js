@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // const apiUrl = "http://localhost:5235/items"
-axios.defaults.baseURL = 'http://localhost:5235/';
+const apiUrl = process.env.REACT_APP_API_URL
+axios.defaults.baseURL =apiUrl; //'http://localhost:5235/';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'; // סוג התוכן של הבקשה
 axios.defaults.timeout = 5000; // זמן המתנה מקסימלי לתגובה (במילישניות)
@@ -22,7 +23,7 @@ axios.interceptors.response.use(
 export default {
   getTasks: async () => {
     try{
-      const result = await axios.get(`/api/items`)    
+      const result = await axios.get(`/items`)    
       return result.data;
     }
     catch(error){
