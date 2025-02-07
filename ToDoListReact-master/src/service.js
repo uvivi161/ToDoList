@@ -2,28 +2,29 @@ import axios from 'axios';
 
 // const apiUrl = "http://localhost:5235/items"
 const apiUrl = process.env.REACT_APP_API_URL
+
 axios.defaults.baseURL =apiUrl; //'http://localhost:5235/';
 
-axios.defaults.headers.common['Content-Type'] = 'application/json'; // סוג התוכן של הבקשה
 // axios.defaults.timeout = 5000; // זמן המתנה מקסימלי לתגובה (במילישניות)
-
 
 axios.interceptors.response.use(
   response =>response,
   error => {
-      // אם יש שגיאה, רושמים אותה ללוג
-      console.error('Error response from API:', error);
-  
-      // מחזירים את השגיאה כדי שהקוד יוכל להתמודד איתה
-      return Promise.reject(error);
+    // אם יש שגיאה, רושמים אותה ללוג
+    console.error('Error response from API:', error);
+    
+    // מחזירים את השגיאה כדי שהקוד יוכל להתמודד איתה
+    return Promise.reject(error);
   }
 );
 
+axios.defaults.headers.common['Content-Type'] = 'application/json'; // סוג התוכן של הבקשה
 
 export default {
   getTasks: async () => {
     try{
-      const result = await axios.get(`/api/items`)    
+      debugger;
+      const result = await axios.get(`/items`)    
       debugger;
       return result.data;
     }
@@ -31,6 +32,7 @@ export default {
       console.error('Error in getTasks:', error);
     }
   },
+  
 
   addTask: async(name)=>{
     if(!name){
@@ -176,3 +178,16 @@ export default {
 //     return result.data;
 //   }
 // };
+
+
+
+
+
+
+
+
+
+
+
+
+//rnd_6vAIYJrteQ7REArFgC1YKJS2pVXI
