@@ -50,7 +50,7 @@ export default {
       return;
     }
     console.log('setCompleted', {id, isComplete})
-    const result = await axios.put(`/items/${id}`, { isComplete: isComplete });
+    const result = await axios.put(`/items/${id}`, { IsComplete: isComplete });
     return result.data;
   },
 
